@@ -21,14 +21,6 @@ public class TaskController {
         return  taskMapper.mapToTaskDtoList(service.getAllTasks());
     }
 
-/*   @RequestMapping(method = RequestMethod.GET, value = "getTask/{id}")
-    public List<TaskDto> getTask(@PathVariable("id") String idParam) {
-        Long id = Long.parseLong(idParam);
-        List<Long> idNumbers = new ArrayList<>(1);
-        idNumbers.add(id);
-        return  taskMapper.mapToTaskDtoList(service.getTask(idNumbers));
-    }*/
-
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
     public TaskDto getTask(@RequestParam long id) {
         return taskMapper.mapToTaskDto(service.getTask(id));
