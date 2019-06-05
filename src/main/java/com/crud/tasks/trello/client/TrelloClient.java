@@ -25,14 +25,17 @@ public class TrelloClient {
 
     @Autowired
     RestTemplate restTemplate;
-
+/*
     URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/leszekpogorzelski/boards")
             .queryParam("key", trelloAppKey)
             .queryParam("token", trelloToken)
-            .queryParam("fields", "name,id").build().encode().toUri();
+            .queryParam("fields", "name,id").build().encode().toUri();*/
 
     public List<TrelloBoardDto> getTrelloBoards() {
-        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
+        //TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
+        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(
+                "https://api.trello.com/1/members/leszekpogorzelski/boards" + "?filter=all&fields=name%2Cid" + "&key=" + trelloAppKey + "&token=" + trelloToken,
+                TrelloBoardDto[].class);
             if (boardsResponse != null) {
                 return Arrays.asList(boardsResponse);
             }
