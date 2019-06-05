@@ -1,6 +1,9 @@
 package com.crud.tasks.trello.client;
 
 import com.crud.tasks.domain.TrelloBoardDto;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -11,6 +14,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TrelloClient {
@@ -23,20 +27,25 @@ public class TrelloClient {
     @Value("${trello.app.token}")
     private String trelloToken;
 
+    @Value("${trello.app.username}")
+    private String trelloUserName;
+
     @Autowired
     RestTemplate restTemplate;
-/*
-    URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/leszekpogorzelski/boards")
-            .queryParam("key", trelloAppKey)
-            .queryParam("token", trelloToken)
-            .queryParam("fields", "name,id").build().encode().toUri();*/
+
+     private URI getUri() {
+        return UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/" + trelloUserName + "/boards")
+                .queryParam("key", trelloAppKey)
+                .queryParam("token", trelloToken)
+                .queryParam("fields", "name,id").build().encode().toUri();
+    }
 
     public List<TrelloBoardDto> getTrelloBoards() {
-        //TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
-        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(
-                "https://api.trello.com/1/members/leszekpogorzelski/boards" + "?filter=all&fields=name%2Cid" + "&key=" + trelloAppKey + "&token=" + trelloToken,
-                TrelloBoardDto[].class);
-            if (boardsResponse != null) {
+        URI url = getUri();
+        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
+
+           if (boardsResponse != null) {
+
                 return Arrays.asList(boardsResponse);
             }
                 return new ArrayList<>();
