@@ -49,6 +49,17 @@ public class TrelloMappersTestSuite {
     }
 
     @Test
+    public void testMapToEmptyCard() {
+        //Given
+        TrelloCardDto trelloCardDto = new TrelloCardDto();
+        //When
+        TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
+        //Then
+        Assert.assertNotNull(trelloCard);
+
+    }
+
+    @Test
     public void mapToBoardsDto() {
     //Given
         List<TrelloBoard> trelloBoards = new ArrayList<>();

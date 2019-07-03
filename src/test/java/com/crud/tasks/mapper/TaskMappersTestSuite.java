@@ -28,6 +28,17 @@ public class TaskMappersTestSuite {
 
         //Then
         Assert.assertEquals(new Long(1) , new Long(task.getId()));
+    }
+
+    @Test
+    public void testMapToEmptyTask() {
+        //Given
+        TaskDto taskDto = new TaskDto();
+        //When
+        Task task = taskMapper.mapToTask(taskDto);
+
+        //Then
+        Assert.assertNotNull(task);
 
     }
 
@@ -40,6 +51,17 @@ public class TaskMappersTestSuite {
 
         //Then
         Assert.assertEquals(new Long(1), new Long(taskDto.getId()));
+    }
+
+    @Test
+    public void testMapToEmptyTaskDto() {
+        //Given
+        Task task = new Task();
+        //When
+        TaskDto taskDto = taskMapper.mapToTaskDto(task);
+
+        //Then
+        Assert.assertNotNull(taskDto);
     }
 
     @Test
