@@ -27,7 +27,7 @@ public class TaskMappersTestSuite {
         Task task = taskMapper.mapToTask(taskDto);
 
         //Then
-        Assert.assertEquals(new Long(1) , new Long(task.getId()) );
+        Assert.assertEquals(new Long(1) , new Long(task.getId()));
 
     }
 
@@ -39,7 +39,7 @@ public class TaskMappersTestSuite {
         TaskDto taskDto = taskMapper.mapToTaskDto(task);
 
         //Then
-        Assert.assertEquals(new Long(1), new Long(taskDto.getId())));
+        Assert.assertEquals(new Long(1), new Long(taskDto.getId()));
     }
 
     @Test
