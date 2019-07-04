@@ -31,8 +31,8 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTask", consumes = APPLICATION_JSON_VALUE)
-    public void createTask(@RequestBody TaskDto taskDto) {taskMapper.mapToTaskDto(service.saveTask(taskMapper.mapToTask(taskDto)));
-    //service.saveTask(taskMapper.mapToTask(taskDto));
+    public TaskDto createTask(@RequestBody TaskDto taskDto) { return taskMapper.mapToTaskDto(service.saveTask(taskMapper.mapToTask(taskDto)));
+
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
