@@ -37,7 +37,7 @@ public class TrelloService {
                 adminConfig.getAdminMail(),
                 "",
                 SUBJECT,
-                "New Card" + trelloCardDto.getName() + "has been created on your account")));
+                "New Card" + trelloCardDto.getName() + " has been created on your account")));
         return newCard;
     }
 }
