@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MailCreatorService {
 
@@ -22,6 +25,16 @@ public class MailCreatorService {
     private TemplateEngine templateEngine;
 
     public String buildTrelloCardEmail(String message) {
+
+        List<String> functionality = new ArrayList<>();
+        functionality.add("You can manage your tasks.");
+        functionality.add("Provides connection with Trello account.");
+        functionality.add("Application allows sending tasks to Trello.");
+
+        List<String> information = new ArrayList<>();
+        information.add("This email was generated automatically.");
+        information.add("Please do not respond.");
+
         Context context = new Context();
         context.setVariable("message", message);
         context.setVariable("tasks_url", "http://localhost:8888/tasks_frontend");
@@ -30,6 +43,18 @@ public class MailCreatorService {
         context.setVariable("goodbye", "Thank you for using our app!");
         context.setVariable("company_name", companyConfig.getCompanyName());
         context.setVariable("company_email", companyConfig.getCompanyMail());
+        context.setVariable("admin_config", adminConfig);
+        if (message.contains("currently")) {
+            context.setVariable("show_button", false);
+            context.setVariable("is_friend", true);
+            context.setVariable("application_functionality", information);
+
+        } else {
+            context.setVariable("show_button", true);
+            context.setVariable("is_friend", false);
+            context.setVariable("application_functionality", functionality);
+        }
         return templateEngine.process("mail/created-trello-card-mail", context);
     }
 }
+
