@@ -23,7 +23,7 @@ public class EmailScheduler {
 
     private final static String SUBJECT = "Once a day mail.";
 
-    @Scheduled(fixedDelay = 10000/*, cron = "0 0 0 10 * *"*/)
+/*    @Scheduled(fixedDelay = 10000*//*, cron = "0 0 0 10 * *"*//*)
     public void sendInformationEmail(){
     long size = taskRepository.count();
     StringBuilder task = new StringBuilder();
@@ -35,6 +35,6 @@ public class EmailScheduler {
             "",
             SUBJECT,
             "currently you have " + size + " " + task + " stored in db."));
-    }
+    }*/
 
 }

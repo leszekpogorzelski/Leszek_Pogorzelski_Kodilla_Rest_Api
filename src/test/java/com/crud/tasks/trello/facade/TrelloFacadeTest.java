@@ -66,7 +66,7 @@ public class TrelloFacadeTest {
     public void shouldFetchTrelloBoards() {
         //Given
         List<TrelloListDto> trelloLists = new ArrayList<>();
-        trelloLists.add(new TrelloListDto("my_list", "1", false ));
+        trelloLists.add(new TrelloListDto("1", "my_list", false ));
 
         List<TrelloBoardDto> trelloBoards = new ArrayList<>();
         trelloBoards.add(new TrelloBoardDto("1", "my_task", trelloLists));
