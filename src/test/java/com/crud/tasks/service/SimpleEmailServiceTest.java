@@ -24,9 +24,11 @@ public class SimpleEmailServiceTest {
     @InjectMocks
     private SimpleEmailService simpleEmailService;
 
-
     @Mock
     private JavaMailSender javaMailSender;
+
+    @Mock
+    private MailCreatorService mailCreatorService;
 
 
     @Test
@@ -34,14 +36,7 @@ public class SimpleEmailServiceTest {
         //Given
         Mail mail = new Mail("test@test.com", "test@test.com", "Test", "Test message");
 
-/*
-        when(javaMailSender.createMimeMessage()).thenReturn(new MimeMessagePreparator createMessage
-            return mimeMessage -> {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-            mimeMessageHelper.setTo("test@test.com");
-            mimeMessageHelper.setSubject("Test");
-            mimeMessageHelper.setText("Test message");
-            };*/
+        when(mailCreatorService.buildTrelloCardEmail(any(String.class))).thenReturn(mail.getMessage());
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
@@ -51,18 +46,12 @@ public class SimpleEmailServiceTest {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
 
-
         //When
-
         simpleEmailService.send(new Mail("test@test.com", "test@test.com", "Test", "Test message"));
 
         //Then
-
-        verify(javaMailSender, times(1)).send(mailMessage);
+        verify(javaMailSender, times(1)).send(any(MimeMessagePreparator.class));
     }
-
-
-
 
 
 }
