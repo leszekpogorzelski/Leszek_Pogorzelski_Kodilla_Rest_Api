@@ -82,6 +82,7 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("content", is("Test content")));
     }
 
+/*
   @Test
     public void testCreateTask() throws Exception {
         //Given
@@ -102,7 +103,8 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("content", is("Test content")));
 
 
-  }
+
+  }*/
     @Test
     public void testDeleteTask() throws Exception {
         // Given & When & Then

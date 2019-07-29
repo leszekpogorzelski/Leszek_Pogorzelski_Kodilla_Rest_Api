@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,7 +37,7 @@ public class SimpleEmailServiceTest {
         //Given
         Mail mail = new Mail("test@test.com", "test@test.com", "Test", "Test message");
 
-        when(mailCreatorService.buildTrelloCardEmail(any(String.class))).thenReturn(mail.getMessage());
+//        when(mailCreatorService.buildTrelloCardEmail(any(String.class))).thenReturn(mail.getMessage());
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
